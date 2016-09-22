@@ -16,7 +16,6 @@ var gulphtmlmin = require('gulp-htmlmin');
 var gulpimagemin = require('gulp-imagemin');
 var gulpuglify = require('gulp-uglify');
 
-
 var src_exclude = ['!src/bower_components{,/**}'];
 
 var paths = {
@@ -45,7 +44,6 @@ gulp.task("mainbowerfiles", function () {
             .pipe(gulp.dest(paths.dist + '/bower_components'));
 });
 
-// processes javascripts, coffeescripts, and typescripts
 gulp.task('scripts', function () {
     return gulp.src(paths.src_scripts).pipe(gulpjshint())
             .pipe(gulpuglify())
@@ -74,6 +72,7 @@ gulp.task('images', function () {
             }))
             .pipe(gulp.dest(paths.dist_images));
 });
+
 gulp.task('markups', ['mainbowerfiles', 'scripts', 'images', 'styles'], function () {
     return gulp.src(paths.src_markups)
             .pipe(gulphtmlmin({collapseWhitespace: true}))
