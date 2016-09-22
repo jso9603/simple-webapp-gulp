@@ -24,8 +24,11 @@
     "gulp-debug": "^2.1.2",
     "gulp-htmlmin": "^3.0.0",
     "gulp-imagemin": "^3.0.3",
+    "gulp-jshint": "^2.0.1",
     "gulp-sass": "^2.3.2",
+    "gulp-uglify": "^2.0.0",
     "imagemin-pngquant": "^5.0.0",
+    "jshint": "^2.9.3",
     "main-bower-files": "^2.13.1",
     "merge-stream": "^1.0.0"
   }

@@ -1,22 +1,20 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 var del = require('del');
 
 var imageminpngquant = require('imagemin-pngquant');
+
 var mainbowerfiles = require('main-bower-files');
 var mergestream = require('merge-stream');
 
 var gulp = require('gulp');
 //var gulpconcat = require('gulp-concat');
+var gulpjshint = require('gulp-jshint');
 var gulpsass = require('gulp-sass');
 var gulpcleancss = require('gulp-clean-css');
 var gulpdebug = require('gulp-debug');
 var gulphtmlmin = require('gulp-htmlmin');
 var gulpimagemin = require('gulp-imagemin');
+var gulpuglify = require('gulp-uglify');
 
 
 var src_exclude = ['!src/bower_components{,/**}'];
@@ -26,9 +24,11 @@ var paths = {
     src_markups: ['src/**/*.html'].concat(src_exclude),
     src_css: ['src/styles/**/*.css'].concat(src_exclude),
     src_sass: ['src/styles/**/*.scss'].concat(src_exclude),
+    src_scripts: ['src/scripts/**/*.js'].concat(src_exclude),
     dist: 'dist',
     dist_styles: 'dist/styles',
     dist_markups: 'dist',
+    dist_scripts: 'dist/scripts',
     deploy: 'deploy',
     src_images: ['src/images/**/*.png', 'src/images/**/*.jpg', 'src/images/**/*.svg'].concat(src_exclude),
     dist_images: 'dist/images'
@@ -45,6 +45,13 @@ gulp.task("mainbowerfiles", function () {
             .pipe(gulp.dest(paths.dist + '/bower_components'));
 });
 
+// processes javascripts, coffeescripts, and typescripts
+gulp.task('scripts', function () {
+    return gulp.src(paths.src_scripts).pipe(gulpjshint())
+            .pipe(gulpuglify())
+            .pipe(gulp.dest(paths.dist_scripts));
+});
+
 gulp.task('styles', function () {
     return mergestream(
             (gulp.src(paths.src_css)),
@@ -57,12 +64,6 @@ gulp.task('styles', function () {
             .pipe(gulp.dest(paths.dist_styles));
 });
 
-gulp.task('markups', ['mainbowerfiles'], function () {
-    return gulp.src(paths.src_markups)
-            .pipe(gulphtmlmin({collapseWhitespace: true}))
-            .pipe(gulp.dest(paths.dist_markups));
-});
-
 gulp.task('images', function () {
     return gulp.src(paths.src_images)
             .pipe(gulpdebug({title: 'images'}))
@@ -73,6 +74,13 @@ gulp.task('images', function () {
             }))
             .pipe(gulp.dest(paths.dist_images));
 });
+gulp.task('markups', ['mainbowerfiles', 'scripts', 'images', 'styles'], function () {
+    return gulp.src(paths.src_markups)
+            .pipe(gulphtmlmin({collapseWhitespace: true}))
+            .pipe(gulp.dest(paths.dist_markups));
+});
+
+
 
 /*
  gulp.task('archive', [], function() {
@@ -86,7 +94,7 @@ gulp.task('images', function () {
  });
  */
 
-gulp.task('build', ['styles', 'markups', 'images'], function () {
+gulp.task('build', ['markups'], function () {
 
 });
 
