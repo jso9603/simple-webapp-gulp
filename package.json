@@ -1,0 +1,24 @@
+{
+  "name": "simple-webapp-gulp",
+  "version": "1.0.0",
+  "description": "example project for demo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jso9603/simple-webapp-gulp.git"
+  },
+  "author": "jisoo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jso9603/simple-webapp-gulp/issues"
+  },
+  "homepage": "https://github.com/jso9603/simple-webapp-gulp#readme",
+  "devDependencies": {
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0"
+  }
+}

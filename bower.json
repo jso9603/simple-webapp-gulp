@@ -1,0 +1,21 @@
+{
+  "name": "simple-webapp-gulp",
+  "description": "example project for demo",
+  "main": "index.js",
+  "authors": [
+    "jisoo"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/jso9603/simple-webapp-gulp",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.0"
+  }
+}
