@@ -19,6 +19,14 @@
   "devDependencies": {
     "del": "^2.2.2",
     "gulp": "^3.9.1",
-    "gulp-concat": "^2.6.0"
+    "gulp-clean-css": "^2.0.12",
+    "gulp-concat": "^2.6.0",
+    "gulp-debug": "^2.1.2",
+    "gulp-htmlmin": "^3.0.0",
+    "gulp-imagemin": "^3.0.3",
+    "gulp-sass": "^2.3.2",
+    "imagemin-pngquant": "^5.0.0",
+    "main-bower-files": "^2.13.1",
+    "merge-stream": "^1.0.0"
   }
 }
