@@ -88,15 +88,10 @@ gulp.task('markups', ['mainbowerfiles', 'scripts', 'images', 'styles'], function
  
  gulp.task('default', ['archive'], function() { 
  });
- 
- gulp.task('build', ['default'], function() {     
- });
  */
 
 gulp.task('build', ['markups'], function () {
-
 });
 
 gulp.task('default', function () {
-
 });
