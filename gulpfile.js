@@ -12,6 +12,7 @@ var gulpjshint = require('gulp-jshint');
 var gulpsass = require('gulp-sass');
 var gulpcleancss = require('gulp-clean-css');
 var gulpdebug = require('gulp-debug');
+var gulphtmlhint = require("gulp-htmlhint");
 var gulphtmlmin = require('gulp-htmlmin');
 var gulpimagemin = require('gulp-imagemin');
 var gulpuglify = require('gulp-uglify');
@@ -29,7 +30,8 @@ var paths = {
     dist_markups: 'dist',
     dist_scripts: 'dist/scripts',
     deploy: 'deploy',
-    src_images: ['src/images/**/*.png', 'src/images/**/*.jpg', 'src/images/**/*.svg'].concat(src_exclude),
+//    src_images: ['src/images/**/*.png', 'src/images/**/*.jpg', 'src/images/**/*.svg'].concat(src_exclude),
+    src_images: ['src/images/**/*.png', 'src/images/**/*.jpg'].concat(src_exclude),
     dist_images: 'dist/images'
 };
 
@@ -44,8 +46,9 @@ gulp.task("mainbowerfiles", function () {
             .pipe(gulp.dest(paths.dist + '/bower_components'));
 });
 
-gulp.task('scripts', function () {
-    return gulp.src(paths.src_scripts).pipe(gulpjshint())
+gulp.task('scripts', [], function () {
+    return gulp.src(paths.src_scripts)
+            .pipe(gulpjshint())
             .pipe(gulpuglify())
             .pipe(gulp.dest(paths.dist_scripts));
 });
@@ -67,7 +70,7 @@ gulp.task('images', function () {
             .pipe(gulpdebug({title: 'images'}))
             .pipe(gulpimagemin({
                 progressive: true,
-                svgoPlugins: [{removeViewBox: false}],
+//                svgoPlugins: [{removeViewBox: false}],
                 use: [imageminpngquant()]
             }))
             .pipe(gulp.dest(paths.dist_images));
@@ -75,6 +78,7 @@ gulp.task('images', function () {
 
 gulp.task('markups', ['mainbowerfiles', 'scripts', 'images', 'styles'], function () {
     return gulp.src(paths.src_markups)
+            .pipe(gulphtmlhint())
             .pipe(gulphtmlmin({collapseWhitespace: true}))
             .pipe(gulp.dest(paths.dist_markups));
 });

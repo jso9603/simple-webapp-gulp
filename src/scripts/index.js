@@ -46,38 +46,13 @@ $(document).ready(function () {
         }
         document.getElementById("keyResult").innerHTML = "입력하신 keyCode 값은 " + event.keyCode + ", Key는 " + key + "입니다.";
     };
-    //keyCode 예제
-    var keyInput = document.getElementById("keyInput");
-    var key;
-//    keyInput.onkeydown = function (event) {
-//        console.log("keyCode: " + event.keyCode);
-//        switch (event.keyCode) {
-//            case 13:
-//                key = "Enter";
-//                break;
-//            case 37:
-//                key = "Arrow Left";
-//                break;
-//            case 38:
-//                key = "Arrow Up";
-//                break;
-//            case 39:
-//                key = "Arrow Right";
-//                break;
-//            case 40:
-//                key = "Arrow Down";
-//                break;
-//            default:
-//                key = "Error";
-//                break;
-//        }
-//        document.getElementById("keyResult").innerHTML = "입력하신 keyCode 값은 " + event.keyCode + ", Key는 " + key + "입니다.";
-//    };
 });
 
 //window가 로딩된 후
 $(window).on("load", function () {
     console.log("$(window).on('load')");
+    var printer = Printer-- > get
+    console.log("priter: " + printer);
 });
 
 //웹페이지의 로딩이 끝나는 시점에 실행되는 함수
