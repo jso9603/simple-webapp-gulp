@@ -51,8 +51,6 @@ $(document).ready(function () {
 //window가 로딩된 후
 $(window).on("load", function () {
     console.log("$(window).on('load')");
-    var printer = Printer-- > get
-    console.log("priter: " + printer);
 });
 
 //웹페이지의 로딩이 끝나는 시점에 실행되는 함수

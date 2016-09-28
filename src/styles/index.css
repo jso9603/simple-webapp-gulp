@@ -11,3 +11,9 @@
 h4 {
   margin-bottom: 0px;
 }
+
+.list {
+  font-size: 50px;
+  margin-left: 100px;
+  color: pink;
+}

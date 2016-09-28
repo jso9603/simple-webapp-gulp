@@ -17,21 +17,21 @@ var gulphtmlmin = require('gulp-htmlmin');
 var gulpimagemin = require('gulp-imagemin');
 var gulpuglify = require('gulp-uglify');
 
-var src_exclude = ['!src/bower_components{,/**}'];
+//var src_exclude = ['!src/bower_components{,/**}'];
 
 var paths = {
     src: 'src',
-    src_markups: ['src/**/*.html'].concat(src_exclude),
-    src_css: ['src/styles/**/*.css'].concat(src_exclude),
-    src_sass: ['src/styles/**/*.scss'].concat(src_exclude),
-    src_scripts: ['src/scripts/**/*.js'].concat(src_exclude),
+    src_markups: ['src/**/*.html'],
+    src_css: ['src/styles/**/*.css'],
+    src_sass: ['src/styles/**/*.scss'],
+    src_scripts: ['src/scripts/**/*.js'],
     dist: 'dist',
     dist_styles: 'dist/styles',
     dist_markups: 'dist',
     dist_scripts: 'dist/scripts',
     deploy: 'deploy',
 //    src_images: ['src/images/**/*.png', 'src/images/**/*.jpg', 'src/images/**/*.svg'].concat(src_exclude),
-    src_images: ['src/images/**/*.png', 'src/images/**/*.jpg'].concat(src_exclude),
+    src_images: ['src/images/**/*.png', 'src/images/**/*.jpg'],
     dist_images: 'dist/images'
 };
 
@@ -41,7 +41,7 @@ gulp.task('clean', function () {
 
 // copies bower main files while preseving directory structures
 gulp.task("mainbowerfiles", function () {
-    return gulp.src(mainbowerfiles(), {base: paths.src + '/bower_components'})
+    return gulp.src(mainbowerfiles(), {base: 'bower_components'})
             .pipe(gulpdebug({title: 'mainbowerfiles'}))
             .pipe(gulp.dest(paths.dist + '/bower_components'));
 });
