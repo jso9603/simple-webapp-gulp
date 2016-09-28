@@ -80,6 +80,7 @@ $(document).ready(function () {
 //        }
 //    });
     
+//    Allow-Control-Allow-Origin 확장 프로그램 설치(구글 앱스토어)
     $.getJSON({
         url: 'https://211.253.31.215:58181/ippl-resources/resources/operators/1/services/1/events.json',
         data: data,
