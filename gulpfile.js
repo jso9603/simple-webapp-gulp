@@ -9,6 +9,7 @@ var mergestream = require('merge-stream');
 var gulp = require('gulp');
 //var gulpconcat = require('gulp-concat');
 var gulpjshint = require('gulp-jshint');
+var gulprename = require('gulp-rename');
 var gulpsass = require('gulp-sass');
 var gulpcleancss = require('gulp-clean-css');
 var gulpdebug = require('gulp-debug');
@@ -16,6 +17,7 @@ var gulphtmlhint = require("gulp-htmlhint");
 var gulphtmlmin = require('gulp-htmlmin');
 var gulpimagemin = require('gulp-imagemin');
 var gulpuglify = require('gulp-uglify');
+var gulputil = require('gulp-util');
 
 //var src_exclude = ['!src/bower_components{,/**}'];
 
@@ -26,6 +28,7 @@ var paths = {
     src_sass: ['src/styles/**/*.scss'],
     src_scripts: ['src/scripts/**/*.js'],
     dist: 'dist',
+    dist_config: 'dist/config',
     dist_styles: 'dist/styles',
     dist_markups: 'dist',
     dist_scripts: 'dist/scripts',
@@ -34,6 +37,11 @@ var paths = {
     src_images: ['src/images/**/*.png', 'src/images/**/*.jpg'],
     dist_images: 'dist/images'
 };
+
+gulputil.log("NODE_ENV: " + process.env.NODE_ENV);
+var environment = process.env.NODE_ENV || (gulputil.env.environment || 'production');
+gulputil.log('environment: ' + environment);
+process.env.NODE_ENV = environment;
 
 gulp.task('clean', function () {
     return del.sync([paths.dist + '/**', paths.deploy + '/**']);
@@ -46,7 +54,14 @@ gulp.task("mainbowerfiles", function () {
             .pipe(gulp.dest(paths.dist + '/bower_components'));
 });
 
-gulp.task('scripts', [], function () {
+gulp.task('config-default', function () {
+    return gulp.src([paths.src + '/config/default-' + environment + '.json'])
+            .pipe(gulpdebug({title: 'config-default'}))
+            .pipe(gulprename('default.json'))
+            .pipe(gulp.dest(paths.dist_config));
+});
+
+gulp.task('scripts', ['config-default'], function () {
     return gulp.src(paths.src_scripts)
             .pipe(gulpjshint())
             .pipe(gulpuglify())
@@ -97,5 +112,5 @@ gulp.task('markups', ['mainbowerfiles', 'scripts', 'images', 'styles'], function
 gulp.task('build', ['markups'], function () {
 });
 
-gulp.task('default', function () {
+gulp.task('default', ['build'], function () {
 });

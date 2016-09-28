@@ -45,7 +45,7 @@ $(document).ready(function () {
                 break;
         }
         document.getElementById("keyResult").innerHTML = "입력하신 keyCode 값은 " + event.keyCode + ", Key는 " + key + "입니다.";
-    };
+    };    
 });
 
 //window가 로딩된 후
