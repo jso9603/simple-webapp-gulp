@@ -1,4 +1,5 @@
 var config;
+var data;
 
 //브라우저가 DOM트리 생성한 직후
 $(document).ready(function () {
@@ -54,6 +55,37 @@ $(document).ready(function () {
         success: function (data) {
             config = data;
             console.log('baseUrl: ' + config.baseurl);
+        }
+    });
+    
+//    아래의 $.getJSON()과 동일하게 실행    
+//    $.ajax({
+//        url: 'https://211.253.31.215:58181/ippl-resources/resources/operators/1/services/1/events.json',
+//        dataType: 'json',
+//        type: 'GET',
+//        contentType: 'application/json',
+//        data: data,
+//        success: function(data) {
+//            console.log('success');
+//            console.log(data);
+//        },
+//        error: function(xhr, status, err) {
+//            if(xhr.status === 401) {
+//                console.log("401");
+//            }else if(xhr.status === 403) {
+//                console.log("403");
+//            } else {
+//                console.log(xhr.status);
+//            }
+//        }
+//    });
+    
+    $.getJSON({
+        url: 'https://211.253.31.215:58181/ippl-resources/resources/operators/1/services/1/events.json',
+        data: data,
+        success: function(data) {
+            data = data;
+            console.log(data);
         }
     });
 });
