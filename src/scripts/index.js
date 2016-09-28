@@ -1,3 +1,5 @@
+var config;
+
 //브라우저가 DOM트리 생성한 직후
 $(document).ready(function () {
     console.log("$(document).ready()");
@@ -45,7 +47,15 @@ $(document).ready(function () {
                 break;
         }
         document.getElementById("keyResult").innerHTML = "입력하신 keyCode 값은 " + event.keyCode + ", Key는 " + key + "입니다.";
-    };    
+    };
+    
+    $.getJSON({
+        url: 'config/default.json',
+        success: function (data) {
+            config = data;
+            console.log('baseUrl: ' + config.baseurl);
+        }
+    });
 });
 
 //window가 로딩된 후
