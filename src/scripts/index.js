@@ -1,5 +1,5 @@
 var config;
-var data;
+//var data;
 
 //브라우저가 DOM트리 생성한 직후
 $(document).ready(function () {
@@ -49,7 +49,7 @@ $(document).ready(function () {
         }
         document.getElementById("keyResult").innerHTML = "입력하신 keyCode 값은 " + event.keyCode + ", Key는 " + key + "입니다.";
     };
-    
+
     $.getJSON({
         url: 'config/default.json',
         success: function (data) {
@@ -57,38 +57,67 @@ $(document).ready(function () {
             console.log('baseUrl: ' + config.baseurl);
         }
     });
-    
-//    아래의 $.getJSON()과 동일하게 실행    
+
+//    아래의 $.getJSON()과 동일하게 실행
 //    $.ajax({
-//        url: 'https://211.253.31.215:58181/ippl-resources/resources/operators/1/services/1/events.json',
+//        url: 'http://....',
 //        dataType: 'json',
 //        type: 'GET',
 //        contentType: 'application/json',
 //        data: data,
-//        success: function(data) {
+//        success: function (data) {
 //            console.log('success');
 //            console.log(data);
 //        },
-//        error: function(xhr, status, err) {
-//            if(xhr.status === 401) {
+//        error: function (xhr, status, err) {
+//            if (xhr.status === 401) {
 //                console.log("401");
-//            }else if(xhr.status === 403) {
+//            } else if (xhr.status === 403) {
 //                console.log("403");
 //            } else {
 //                console.log(xhr.status);
 //            }
 //        }
 //    });
-    
+
 //    Allow-Control-Allow-Origin 확장 프로그램 설치(구글 앱스토어)
     $.getJSON({
-        url: 'https://211.253.31.215:58181/ippl-resources/resources/operators/1/services/1/events.json',
-        data: data,
-        success: function(data) {
-            data = data;
+        url: 'http://....',
+        //data: data,
+        success: function (data) {
             console.log(data);
+            console.log(typeof (data));
+            console.log("data.length: " + data.length);
+            for (var i = 0; i < data.length; i++) {
+                console.log("------------------------------------------------");
+                console.log("data[" + i + "].name: " + data[i].name);
+                console.log("data[" + i + "].startTime: " + data[i].startTime);
+                console.log("data[" + i + "].playTime: " + data[i].playTime);
+                var startTime = data[i].startTime;
+                //var playTime = data[i].playTime;
+                var milliseconds = Date.parse(startTime);
+                var seconds = milliseconds / 1000;
+                console.log("startTime as milliseconds: " + milliseconds);
+                console.log("startTime as seconds: " + seconds);
+                console.log('startTime as Date: ' + new Date(milliseconds));
+                console.log('startTime in milliseconds from now: ' + (new Date(milliseconds) - Date.now()));
+                console.log('startTime in seconds from now: ' + ((new Date(milliseconds) - Date.now()) / 1000));
+            }
         }
     });
+    
+
+    $('#img').attr('src', 'http://www.fnordware.com/superpng/pnggrad8rgb.png');
+
+//    var img = $("<img />").attr('src', 'http://www.fnordware.com/superpng/pnggrad16rgb.png')
+//            .on('load', function () {
+//                if (!this.complete || typeof this.naturalWidth === "undefined" || this.naturalWidth === 0) {
+//                    alert('broken image!');
+//                } else {
+//                    $("#showImage").append(img);
+//                }
+//            });
+
 });
 
 //window가 로딩된 후
